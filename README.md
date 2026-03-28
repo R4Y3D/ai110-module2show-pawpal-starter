@@ -89,7 +89,7 @@ The core scheduling behaviors are fully verified. The one gap is duration-based 
 
 ## 📸 Demo
 
-<a href="/ai110-module2show-pawpal-starter/PawPal_screenshot.png" target="_blank"><img src='/ai110-module2show-pawpal-starter/PawPal_screenshot.png' title='PawPal App' width='' alt='PawPal App' class='center-block' /></a>
+![PawPal App](PawPal_screenshot.png)
 
 ---
 
