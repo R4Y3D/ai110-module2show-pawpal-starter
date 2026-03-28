@@ -1,16 +1,24 @@
 # PawPal+ Project Reflection
 
 ## 1. System Design
+    Three core actions:
+        1. Add a pet
+        2. Add/schedule a care task
+        3. Generate and view today's schedule
 
 **a. Initial design**
 
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
 
+I was able to design the four classes which were task, pet, owner, and scheduler. Task holds all the activity data. Pet stores a pet's identity and its list of tasks. Owner manages multple pets and can flatten all their tasks into one big list. Finally scheduler is basically what acts as the brain. It uses owner to sort, filter and detect conflicts and also handle task completion. 
+
 **b. Design changes**
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
+
+After throroughly reviewing the scehduler and getting feedback from my LLM, I added a get_pet(name) helper method to Owner. Without this, scheduler would have to repeat pet-lookup logic in every method that needs to find a specific pet by name. I was told to move this to owner to keep each class focusd on its own responsibilities.
 
 ---
 
