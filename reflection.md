@@ -31,8 +31,7 @@ After throroughly reviewing the scehduler and getting feedback from my LLM, I ad
 
 **b. Tradeoffs**
 
-- Describe one tradeoff your scheduler makes.
-- Why is that tradeoff reasonable for this scenario?
+The scheduler only flags conflicts when two tasks share the exact same start time (e.g., both at "07:30"). It does not check whether task durations overlap — for example, a 30-minute task at 07:00 and a 10-minute task at 07:20 would collide in practice but go undetected. This is a reasonable tradeoff for a daily pet care planner because pet care tasks are rarely scheduled down to the minute and owners naturally leave buffer time between activities. Implementing duration-based overlap detection would require storing an end time for every task and running a more complex interval comparison, adding logic complexity that isn't justified for this use case.
 
 ---
 

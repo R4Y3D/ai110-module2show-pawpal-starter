@@ -89,8 +89,12 @@ class Scheduler:
         self.owner = owner
 
     def sort_by_time(self) -> list:
-        """Return all tasks sorted chronologically by HH:MM time."""
-        return sorted(self.owner.get_all_tasks(), key=lambda t: t.time)
+        """Return all tasks sorted by HH:MM time, with priority as a tiebreaker."""
+        priority_order = {"high": 0, "medium": 1, "low": 2}
+        return sorted(
+            self.owner.get_all_tasks(),
+            key=lambda t: (t.time, priority_order.get(t.priority, 3))
+        )
 
     def filter_tasks(self, completed: Optional[bool] = None, pet_name: Optional[str] = None) -> list:
         """Return tasks filtered by completion status and/or pet name."""
