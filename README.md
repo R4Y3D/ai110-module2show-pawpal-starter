@@ -1,28 +1,36 @@
-# PawPal+ (Module 2 Project)
+# PawPal+ 🐾
 
-You are building **PawPal+**, a Streamlit app that helps a pet owner plan care tasks for their pet.
+A smart pet care scheduling app built with Python and Streamlit. PawPal+ helps pet owners stay consistent with daily care routines by organizing tasks, detecting conflicts, and automatically handling recurring activities.
 
-## Scenario
+---
 
-A busy pet owner needs help staying consistent with pet care. They want an assistant that can:
+## Features
 
-- Track pet care tasks (walks, feeding, meds, enrichment, grooming, etc.)
-- Consider constraints (time available, priority, owner preferences)
-- Produce a daily plan and explain why it chose that plan
+- **Multi-pet management** — register multiple pets under one owner profile; each pet maintains its own independent task list
+- **Sorting by time** — tasks are sorted chronologically by HH:MM start time using Python's `sorted()` with a lambda key; when two tasks share the same time, priority (high → medium → low) acts as a tiebreaker
+- **Filter by pet or status** — view tasks for a specific pet, or narrow by pending/completed status; filters can be combined
+- **Conflict warnings** — the Scheduler scans all tasks pairwise and surfaces a plain-English warning when two tasks are booked at the same time, so no care activity gets missed
+- **Daily and weekly recurrence** — marking a recurring task complete automatically creates the next occurrence using Python's `timedelta` (daily: +1 day, weekly: +7 days), keeping the schedule self-maintaining
+- **Live Streamlit UI** — sidebar-based setup, filterable schedule table, summary metrics (total / completed / pending), and color-coded conflict alerts
 
-Your job is to design the system first (UML), then implement the logic in Python, then connect it to the Streamlit UI.
+---
 
-## What you will build
+## System Architecture
 
-Your final app should:
+Four core classes work together:
 
-- Let a user enter basic owner + pet info
-- Let a user add/edit tasks (duration + priority at minimum)
-- Generate a daily schedule/plan based on constraints and priorities
-- Display the plan clearly (and ideally explain the reasoning)
-- Include tests for the most important scheduling behaviors
+| Class | Responsibility |
+|-------|---------------|
+| `Task` | Holds all activity data; produces next occurrence on completion |
+| `Pet` | Stores a pet's identity and task list |
+| `Owner` | Manages multiple pets; aggregates all tasks |
+| `Scheduler` | Sorts, filters, detects conflicts, and handles task completion |
 
-## Getting started
+UML diagram: see `Mernaid.md` in the project root.
+
+---
+
+## Getting Started
 
 ### Setup
 
@@ -32,6 +40,20 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
+### Run the app
+
+```bash
+streamlit run app.py
+```
+
+### Run the CLI demo
+
+```bash
+python main.py
+```
+
+---
+
 ## Smarter Scheduling
 
 PawPal+ uses algorithmic logic to go beyond a simple task list:
@@ -40,6 +62,8 @@ PawPal+ uses algorithmic logic to go beyond a simple task list:
 - **Filter by pet or status** — view only a specific pet's tasks, or show only pending/completed tasks across all pets
 - **Conflict detection** — the scheduler scans all tasks pairwise and warns when two tasks are scheduled at the exact same time
 - **Recurring tasks** — marking a daily or weekly task complete automatically creates the next occurrence with an updated due date using Python's `timedelta`
+
+---
 
 ## Testing PawPal+
 
@@ -63,7 +87,13 @@ The core scheduling behaviors are fully verified. The one gap is duration-based 
 
 ---
 
-### Suggested workflow
+## 📸 Demo
+
+<a href="/ai110-module2show-pawpal-starter/PawPal_screenshot.png" target="_blank"><img src='/ai110-module2show-pawpal-starter/PawPal_screenshot.png' title='PawPal App' width='' alt='PawPal App' class='center-block' /></a>
+
+---
+
+## Suggested Workflow
 
 1. Read the scenario carefully and identify requirements and edge cases.
 2. Draft a UML diagram (classes, attributes, methods, relationships).

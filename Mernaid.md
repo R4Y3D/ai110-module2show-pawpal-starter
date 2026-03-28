@@ -1,9 +1,10 @@
-/* 
+'''mermaid
 classDiagram
     class Owner {
         +String name
         +List~Pet~ pets
         +add_pet(pet: Pet)
+        +get_pet(name: String) Pet
         +get_all_tasks() List~Task~
     }
 
@@ -38,4 +39,5 @@ classDiagram
     Owner "1" --> "many" Pet : has
     Pet "1" --> "many" Task : has
     Scheduler "1" --> "1" Owner : manages
-    */
+    Task --> Task : mark_complete() creates next occurrence
+'''
