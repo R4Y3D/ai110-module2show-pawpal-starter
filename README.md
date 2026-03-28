@@ -41,6 +41,26 @@ PawPal+ uses algorithmic logic to go beyond a simple task list:
 - **Conflict detection** — the scheduler scans all tasks pairwise and warns when two tasks are scheduled at the exact same time
 - **Recurring tasks** — marking a daily or weekly task complete automatically creates the next occurrence with an updated due date using Python's `timedelta`
 
+## Testing PawPal+
+
+Run the full test suite with:
+
+```bash
+python -m pytest
+```
+
+The suite contains 14 automated tests covering:
+
+- **Task completion** — `mark_complete()` sets status correctly for one-time, daily, and weekly tasks
+- **Recurrence logic** — daily tasks produce a next occurrence due tomorrow; weekly tasks due in 7 days
+- **Sorting correctness** — tasks added out of order are returned in chronological HH:MM order, with priority as a tiebreaker
+- **Conflict detection** — same-time tasks are flagged; clean schedules return an empty list
+- **Filtering** — tasks can be filtered by pet name, completion status, or both; unknown pet names return `[]` gracefully
+- **Edge cases** — scheduler with no tasks, filtering for a non-existent pet, marking an already-complete task
+
+**Confidence level: ⭐⭐⭐⭐ (4/5)**
+The core scheduling behaviors are fully verified. The one gap is duration-based overlap detection — two tasks that overlap in time but don't share an exact start time won't be flagged. That's a known tradeoff documented in `reflection.md`.
+
 ---
 
 ### Suggested workflow
